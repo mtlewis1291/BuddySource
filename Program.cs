@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace BuddyRework
 //Simple purchase/sales tracking using menu navigation and files
-//Assumes only whole (int) dollar amounts, not decimal
 {
     class Program
     {
         static void Main()
         {
             FileData.FileCheck();
-            bool displayMenu = true;
-            while (displayMenu == true)
+            while(true)
             {
-                displayMenu = Menu.MainMenu();
+                Menu.MainMenu();
             }
-
         }
     }
 }

@@ -25,11 +25,11 @@ namespace BuddyRework
         {
             string amount = File.ReadAllText("Amount.txt");
             string bal = File.ReadAllText("Price.txt");
-            Console.WriteLine("Standing units owned: {0}", amount);
-            Console.WriteLine("Standing balance: {0:C}", bal);
+            Console.WriteLine("Standing units owned: {0}", int.Parse(amount));
+            Console.WriteLine("Standing balance: {0:C}", decimal.Parse(bal));
         }
 
-        public static void SaveData(int saveAmount, int savePrice)
+        public static void SaveData(int saveAmount, decimal savePrice)
         {
             using (StreamWriter file = new StreamWriter("Amount.txt", false))
             {

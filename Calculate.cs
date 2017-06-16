@@ -7,19 +7,15 @@ namespace BuddyRework
     {
         public static int CalculateNewAmount(int amount)
         {
-            int newAmount = Int32.Parse(
-                File.ReadAllText(
-                    "Amount.txt"))
-                    + amount;
+            int newAmount = int.Parse(
+                File.ReadAllText("Amount.txt")) + amount;
             return newAmount;
         }
 
-        public static int CalculateNewPrice(int price)
+        public static decimal CalculateNewPrice(decimal price)
         {
-            int newPrice = Int32.Parse(
-                File.ReadAllText(
-                    "Price.txt"))
-                    + price;
+            decimal newPrice = decimal.Parse(
+                File.ReadAllText("Price.txt")) + price;
             return newPrice;
         }
     }
