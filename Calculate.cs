@@ -5,18 +5,18 @@ namespace BuddyRework
 {
     class Calculate
     {
-        public static int CalculateNewAmount(int amount)
+        public static int CalculateNewUnits(int units)
         {
-            int newAmount = int.Parse(
-                File.ReadAllText("Amount.txt")) + amount;
-            return newAmount;
+            int newUnits = int.Parse(
+                File.ReadAllText("Inventory.txt")) + units;
+            return newUnits;
         }
 
-        public static decimal CalculateNewPrice(decimal price)
+        public static decimal CalculateNewValue(decimal value)
         {
-            decimal newPrice = decimal.Parse(
-                File.ReadAllText("Price.txt")) + price;
-            return newPrice;
+            decimal newValue = decimal.Parse(
+                File.ReadAllText("Balance.txt")) + value;
+            return newValue;
         }
     }
 }

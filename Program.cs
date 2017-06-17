@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BuddyRework
-//Simple purchase/sales tracking using menu navigation and files
+//Simple purchase/sales tracking using menu navigation and 2 separate files for storing units and balance
 {
     class Program
     {

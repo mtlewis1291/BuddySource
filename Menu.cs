@@ -17,13 +17,14 @@ namespace BuddyRework
 
         public static void MainMenu()
         {
-            Console.Clear();
+            Console.Clear(); //Clear for each iteration of loop
+
+            int inputUnits; //Input variable to store units bought/sold in Menu navigation switch
+            decimal inputValue; //Input variable to store balance change in Menu navigation switch
+
+            //Begin Menu navigation
             MenuText();
             string result = Console.ReadLine();
-            int inputAmount;
-            decimal inputPrice;
-
-            //Menu navigation
             switch (result)
             {
                 case "1": //Overview
@@ -36,23 +37,23 @@ namespace BuddyRework
                     Console.Clear();
                     Console.WriteLine("Buy Items\n");
                     Console.Write("Enter units purchased: ");
-                    inputAmount = int.Parse(Console.ReadLine());
+                    inputUnits = int.Parse(Console.ReadLine());
                     Console.Write("Enter purchase price: $");
-                    inputPrice = decimal.Parse(Console.ReadLine()) * -1;
+                    inputValue = decimal.Parse(Console.ReadLine()) * -1;
                     Console.Clear();
                     FileData.ReadInventoryFile();
-                    SavePrompt(inputAmount, inputPrice);
+                    SavePrompt(inputUnits, inputValue);
                     break;
                 case "3": //Sell Prompt
                     Console.Clear();
                     Console.WriteLine("Sell Items\n");
                     Console.Write("Enter units sold: ");
-                    inputAmount = int.Parse(Console.ReadLine()) * -1;
+                    inputUnits = int.Parse(Console.ReadLine()) * -1;
                     Console.Write("Enter sale price: $");
-                    inputPrice = decimal.Parse(Console.ReadLine());
+                    inputValue = decimal.Parse(Console.ReadLine());
                     Console.Clear();
                     FileData.ReadInventoryFile();
-                    SavePrompt(inputAmount, inputPrice);
+                    SavePrompt(inputUnits, inputValue);
                     break;
                 case "4": //Reset Prompt
                     ResetPrompt();
@@ -66,28 +67,29 @@ namespace BuddyRework
                     break;
             }
         }
-
-        public static void SavePrompt(int inputAmount, decimal inputPrice)
+        
+        public static void SavePrompt(int inputUnits, decimal inputValue)
         {
-            int newAmount = Calculate.CalculateNewAmount(inputAmount);
-            decimal newPrice = Calculate.CalculateNewPrice(inputPrice);
-            Console.WriteLine("Updated units owned: {0}", newAmount);
-            Console.WriteLine("Updated balance: {0:C}", newPrice);
+            int newUnits = Calculate.CalculateNewUnits(inputUnits);
+            decimal newValue = Calculate.CalculateNewValue(inputValue);
+            Console.WriteLine("Updated units owned: {0}", newUnits);
+            Console.WriteLine("Updated balance: {0:C}", newValue);
             Console.WriteLine();
             Console.WriteLine("Save changes? Y or N");
-            string saveResult = Console.ReadLine();
+            string saveResult = Console.ReadLine().ToUpper();
 
-            if (saveResult == "Y" || saveResult == "y")
+            if (saveResult == "Y")
             {
+                //Extra save step, not absolutely neccesary. Extra practice with a nested loop
                 Console.WriteLine("Are you sure? Y or N");
-                string sureResult = Console.ReadLine();
-                if (sureResult == "Y" || sureResult == "y")
+                string sureResult = Console.ReadLine().ToUpper();
+                if (sureResult == "Y")
                 {
-                    FileData.SaveData(newAmount, newPrice);
+                    FileData.SaveData(newUnits, newValue);
                     Console.WriteLine("Saved!");
                     Console.ReadLine();
                 }
-                else if (sureResult == "N" || sureResult == "n")
+                else if (sureResult == "N")
                 {
                     Console.WriteLine("\nAmount not saved.");
                     Console.ReadLine();
@@ -99,7 +101,7 @@ namespace BuddyRework
                 }
 
             }
-            else if (saveResult == "N" || saveResult == "n")
+            else if (saveResult == "N")
             {
                 Console.WriteLine("\nAmount not saved.");
                 Console.ReadLine();
@@ -115,19 +117,20 @@ namespace BuddyRework
         {
             Console.Clear();
             Console.WriteLine("Reset inventory data? This cannot be undone.");
-            Console.Write("Y or N: ");
-            string saveResult = Console.ReadLine();
-            if (saveResult == "Y" || saveResult == "y")
+            Console.WriteLine("Y or N: ");
+            string saveResult = Console.ReadLine().ToUpper();
+            if (saveResult == "Y")
             {
+                //Extra save step, not absolutely neccesary. Extra practice with a nested loop
                 Console.WriteLine("Are you sure? Y or N");
-                string sureResult = Console.ReadLine();
-                if (sureResult == "Y" || sureResult == "y")
+                string sureResult = Console.ReadLine().ToUpper();
+                if (sureResult == "Y")
                 {
                     FileData.SaveData(0, 0);
                     Console.WriteLine("\nData reset.");
                     Console.ReadLine();
                 }
-                else if (sureResult == "N" || sureResult == "n")
+                else if (sureResult == "N")
                 {
                     Console.WriteLine("\nData not reset.");
                     Console.ReadLine();
@@ -139,7 +142,7 @@ namespace BuddyRework
                 }
 
             }
-            else if (saveResult == "N" || saveResult == "n")
+            else if (saveResult == "N")
             {
                 Console.WriteLine("\nData not reset.");
                 Console.ReadLine();

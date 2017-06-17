@@ -8,36 +8,36 @@ namespace BuddyRework
     {
         public static void FileCheck()
         {
-            string amountPath = "Amount.txt";
-            if (!File.Exists(amountPath))
+            string inventoryPath = "Inventory.txt";
+            if (!File.Exists(inventoryPath))
             {
-                File.WriteAllText(amountPath, "0");
+                File.WriteAllText(inventoryPath, "0");
             }
 
-            string pricePath = "Price.txt";
-            if (!File.Exists(pricePath))
+            string balancePath = "Balance.txt";
+            if (!File.Exists(balancePath))
             {
-                File.WriteAllText(pricePath, "0");
+                File.WriteAllText(balancePath, "0");
             }
         }
 
         public static void ReadInventoryFile()
         {
-            string amount = File.ReadAllText("Amount.txt");
-            string bal = File.ReadAllText("Price.txt");
-            Console.WriteLine("Standing units owned: {0}", int.Parse(amount));
-            Console.WriteLine("Standing balance: {0:C}", decimal.Parse(bal));
+            string units = File.ReadAllText("Inventory.txt");
+            string value = File.ReadAllText("Balance.txt");
+            Console.WriteLine("Standing units owned: {0}", int.Parse(units));
+            Console.WriteLine("Standing balance: {0:C}", decimal.Parse(value));
         }
 
-        public static void SaveData(int saveAmount, decimal savePrice)
+        public static void SaveData(int saveUnits, decimal saveValue)
         {
-            using (StreamWriter file = new StreamWriter("Amount.txt", false))
+            using (StreamWriter file = new StreamWriter("Inventory.txt", false))
             {
-                file.WriteLine(saveAmount.ToString());
+                file.WriteLine(saveUnits.ToString());
             }
-            using (StreamWriter file = new StreamWriter("Price.txt", false))
+            using (StreamWriter file = new StreamWriter("Balance.txt", false))
             {
-                file.WriteLine(savePrice.ToString());
+                file.WriteLine(saveValue.ToString());
             }
         }
     }
